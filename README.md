@@ -55,6 +55,19 @@ Inside `bloom.html`:
 - **Sounds:** short oscillator tones for the bonk, chime, and sparkle.
 - **Themes:** CSS variables switched with a `data-theme` attribute on the root element.
 
+## Screenshots
+<img width="327" height="261" alt="image" src="https://github.com/user-attachments/assets/21e09c4e-ca5a-43b2-86c9-a5e03f3d544b" />
+<img width="290" height="177" alt="image" src="https://github.com/user-attachments/assets/d861cbcc-3a21-4f27-b0a9-3c5bbc4e68da" />
+<img width="284" height="301" alt="image" src="https://github.com/user-attachments/assets/8a5ed67d-5ecd-4eb7-8817-15923dda6fe6" />
+<img width="290" height="182" alt="image" src="https://github.com/user-attachments/assets/8c21e6e6-e059-4e0c-b79e-0a16cbf2fa3a" />
+<img width="289" height="213" alt="image" src="https://github.com/user-attachments/assets/52e21bc0-df20-4351-a03c-63c9bffb02ee" />
+<img width="287" height="260" alt="image" src="https://github.com/user-attachments/assets/01988fa8-a1a3-4b8f-aed0-40e6dab9a680" />
+<img width="300" height="394" alt="image" src="https://github.com/user-attachments/assets/2e96e311-8cbb-4378-835a-52242caf1946" />
+<img width="220" height="341" alt="image" src="https://github.com/user-attachments/assets/c9aab4ae-a757-4948-9650-469116e5f4e0" />
+<img width="299" height="332" alt="image" src="https://github.com/user-attachments/assets/98c6f236-9103-4600-bba1-cc0b7b440df4" />
+<img width="281" height="225" alt="image" src="https://github.com/user-attachments/assets/06254b5f-9f33-4b63-a441-6c1c9ac31067" />
+
+
 ## 🛣 Roadmap
 
 - [ ] Classical background music (royalty-free recordings only)
