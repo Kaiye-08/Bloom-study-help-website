@@ -70,4 +70,4 @@ Ideas and pull requests are welcome. Open an issue first for bigger changes.
 
 ## 📄 License
 
-Add a license of your choice (MIT is a common pick for projects like this).
+MIT License
