@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bloom – study until you flower</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fdf8f0;--card:#fff;--ink:#2b2a33;--mut:#77737f;--acc:#e8678a;--grn:#4a9d5b;--line:#eadfd0;--bad:#d64545;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17171c;--card:#23232b;--ink:#f1eee8;--mut:#a09cab;--line:#34343f}}
+:root[data-theme="dark"]{--bg:#17171c;--card:#23232b;--ink:#f1eee8;--mut:#a09cab;--line:#34343f}
+:root[data-theme="bubblegum"]{--bg:#fff0f6;--card:#fff;--ink:#4a2540;--mut:#9a6b8a;--acc:#ff5fa2;--grn:#3fb68b;--line:#ffd3e6}
+:root[data-theme="matcha"]{--bg:#eef5e6;--card:#fbfff6;--ink:#26361f;--mut:#6b8060;--acc:#5a9a45;--grn:#3c8a3c;--line:#d4e5c4}
+:root[data-theme="dusk"]{--bg:#1b1530;--card:#271f42;--ink:#f3ecff;--mut:#aa9fcf;--acc:#ff8ac2;--grn:#6fd6a0;--line:#3a2f5e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 'Nunito',system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:560px;margin:0 auto;padding:16px}
+h1{font-size:26px;margin:4px 0}h2{font-size:19px;margin:0 0 8px}
+.mut{color:var(--mut);font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:12px 0}
+button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:10px 14px}
+button.pri{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+button.opt{display:block;width:100%;text-align:left;margin:8px 0}
+button.opt:hover{border-color:var(--acc)}
+input,textarea{font:inherit;width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);margin:4px 0}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sp{justify-content:space-between}
+.hud{display:flex;justify-content:space-between;align-items:center;font-weight:600}
+.bar{height:10px;border-radius:6px;background:var(--line);overflow:hidden}.bar i{display:block;height:100%;background:var(--grn);transition:width .4s}
+.modes button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+#plant{position:relative;text-align:center}
+#plant svg{width:190px;height:230px;transition:transform .3s}
+.bonk{position:absolute;left:50%;top:20%;transform:translateX(-50%);font-size:34px;font-weight:800;color:var(--bad);animation:pop .8s forwards;pointer-events:none}
+@keyframes pop{0%{opacity:0;transform:translate(-50%,10px) scale(.5)}30%{opacity:1;transform:translate(-50%,-10px) scale(1.2)}100%{opacity:0;transform:translate(-50%,-40px) scale(1)}}
+.shake{animation:shake .45s}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px) rotate(-3deg)}40%{transform:translateX(10px) rotate(3deg)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
+.happy{animation:hop .5s}
+@keyframes hop{50%{transform:translateY(-12px) scale(1.05)}}
+.tag{display:inline-block;background:var(--acc);color:#fff;border-radius:8px;padding:2px 8px;font-size:12px;font-weight:700}
+.good{color:var(--grn)}.bad{color:var(--bad)}
+.hide{display:none}
+.qrow{border-top:1px solid var(--line);padding-top:8px;margin-top:8px}
+.card{border-radius:22px;box-shadow:0 4px 0 var(--line)}
+button{border-radius:999px;font-weight:700;transition:transform .12s}
+button:hover{transform:translateY(-2px)}button:active{transform:scale(.94)}
+button.pri{box-shadow:0 3px 0 rgba(0,0,0,.18)}
+button.opt{border-radius:16px}input,textarea,select{border-radius:14px!important}
+#dash svg{width:150px;height:auto}
+#themes button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+/* Frutiger Aero pastel themes */
+:root[data-theme="light"]{--bg:#dff3ff;--bg2:#f1fff5;--card:rgba(255,255,255,.62);--ink:#2c4a63;--mut:#6a8ba5;--acc:#43b0e8;--acc2:#9de2ff;--grn:#4cc39a;--line:rgba(120,190,230,.3);--glow:rgba(67,176,232,.28);--rim:rgba(255,255,255,.9)}
+:root[data-theme="bubblegum"]{--bg:#ffe6f3;--bg2:#e8ebff;--card:rgba(255,255,255,.62);--ink:#5a3a63;--mut:#a283ae;--acc:#f272b6;--acc2:#ffbde0;--grn:#5cc9a7;--line:rgba(242,114,182,.25);--glow:rgba(242,114,182,.28);--rim:rgba(255,255,255,.9)}
+:root[data-theme="matcha"]{--bg:#d9f7ec;--bg2:#e4f2ff;--card:rgba(255,255,255,.6);--ink:#285a50;--mut:#639a8e;--acc:#38bfa0;--acc2:#95efd6;--grn:#3aa57b;--line:rgba(56,191,160,.28);--glow:rgba(56,191,160,.28);--rim:rgba(255,255,255,.9)}
+:root[data-theme="dusk"]{--bg:#2c2858;--bg2:#44407f;--card:rgba(255,255,255,.1);--ink:#f2efff;--mut:#bdb8ea;--acc:#8f82f5;--acc2:#c3bcff;--grn:#7de0c0;--line:rgba(255,255,255,.16);--glow:rgba(143,130,245,.35);--rim:rgba(255,255,255,.22)}
+:root[data-theme="dark"]{--bg:#12303a;--bg2:#1f4c52;--card:rgba(255,255,255,.09);--ink:#e8fbf7;--mut:#9fcfc6;--acc:#2fb5a8;--acc2:#7fe6da;--grn:#7de0a8;--line:rgba(255,255,255,.14);--glow:rgba(47,181,168,.3);--rim:rgba(255,255,255,.2)}
+body{background:linear-gradient(160deg,var(--bg),var(--bg2)) fixed;min-height:100vh}
+main{position:relative;z-index:1}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.85;--b:radial-gradient(circle at 35% 30%,rgba(255,255,255,.95) 0 6%,rgba(255,255,255,.3) 40%,rgba(255,255,255,.1) 70%,transparent 72%);background:var(--b) 6% 10%/90px 90px no-repeat,var(--b) 90% 20%/140px 140px no-repeat,var(--b) 10% 72%/120px 120px no-repeat,var(--b) 82% 86%/70px 70px no-repeat,var(--b) 55% 48%/46px 46px no-repeat;animation:drift 14s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translateY(-18px)}}
+body::before{display:none}
+.bubbles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.bubbles i{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.65);background:radial-gradient(circle at 30% 28%,rgba(255,255,255,.95) 0 7%,rgba(255,255,255,.28) 20%,rgba(255,255,255,.07) 60%,rgba(255,255,255,.3) 100%);box-shadow:inset 0 0 16px rgba(255,255,255,.55),0 0 12px rgba(255,255,255,.25);animation:drift 12s ease-in-out infinite alternate}
+.bubbles i:nth-child(1){width:90px;height:90px;left:5%;top:9%}
+.bubbles i:nth-child(2){width:140px;height:140px;right:4%;top:16%;animation-delay:-4s}
+.bubbles i:nth-child(3){width:110px;height:110px;left:8%;top:68%;animation-delay:-7s}
+.bubbles i:nth-child(4){width:64px;height:64px;right:14%;bottom:8%;animation-delay:-2s}
+.bubbles i:nth-child(5){width:40px;height:40px;left:52%;top:44%;animation-delay:-9s}
+.bubbles i:nth-child(6){width:28px;height:28px;left:30%;top:22%;animation-delay:-5s}
+:root[data-theme="dusk"] .bubbles,:root[data-theme="dark"] .bubbles{opacity:.35}
+.card,.stat{background:var(--card);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--rim);box-shadow:0 8px 24px var(--glow),inset 0 1px 0 var(--rim)}
+button{background:var(--card);border-color:var(--rim);box-shadow:0 3px 8px var(--glow),inset 0 1px 0 var(--rim)}
+button.pri,#nav button.on,#themes button.on,.modes button.on{background:linear-gradient(180deg,var(--acc2) 0%,var(--acc) 60%);border-color:var(--rim);color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.25);box-shadow:inset 0 2px 0 rgba(255,255,255,.65),0 4px 12px var(--glow)}
+input,textarea,select{background:var(--card)!important;border:1px solid var(--rim)!important}
+.bar{background:var(--line)}.bar i{background:linear-gradient(180deg,var(--acc2),var(--grn));box-shadow:inset 0 2px 0 rgba(255,255,255,.5)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px;text-align:center;box-shadow:0 3px 0 var(--line);color:var(--mut);font-size:13px}.stat b{display:block;font-size:22px;color:var(--ink)}
+h1{animation:sway 4s ease-in-out infinite;transform-origin:bottom left}@keyframes sway{50%{transform:rotate(-2deg)}}
+#nav{display:flex;gap:6px;overflow-x:auto;margin:8px 0}#nav button{flex:1;white-space:nowrap;font-size:14px;padding:10px 8px}#nav button.on{background:var(--acc);color:#fff;border-color:var(--acc)}#nav.hide{display:none}
+.garden{display:flex;flex-wrap:wrap;gap:8px}.mini{text-align:center;font-size:11px;color:var(--mut)}.mini svg{width:70px;height:85px}
+</style></head><body><div class="bubbles"><i></i><i></i><i></i><i></i><i></i><i></i></div><main>
+<div class="row sp"><h1>🌱 Bloom</h1><span class="row"><span class="mut" id="xpTop"></span><button id="mute">🔊</button></span></div>
+<p class="mut" style="margin-top:0">Get answers right and your plant blooms. Get them wrong and it wilts.</p>
+
+<nav id="nav"></nav>
+<section id="pg-focus" class="page hide"><div class="card"><h2>🎧 Focus sound</h2><p class="mut">Pick a background sound and volume. It keeps playing while you study. Binaural beats need headphones, and the research on them is mixed, so treat it as ambiance.</p><div class="row sp"><select id="aud" style="font:inherit;padding:8px;border-radius:10px;background:var(--bg);color:var(--ink);border:1px solid var(--line)"><option value="off">Off</option><option value="brown">Brown noise</option><option value="white">White noise</option><option value="bin">Binaural beats (headphones)</option></select><input id="vol" type="range" min="5" max="100" value="40" style="width:110px"></div></div></section>
+<section id="pg-home" class="page"><div id="dash"></div><div class="card"><h2>🎨 Pick your vibe</h2><div class="row" id="themes"></div></div>
+<div class="card"><h2>🌿 Fresh start</h2><p class="mut">Reset progress clears your XP, garden and treat journal but keeps your quizzes. Erase everything also deletes your quizzes. Each one asks you to tap twice.</p><div class="row"><button id="rprog">Reset progress</button><button id="rall">Erase everything</button></div></div></section>
+<section id="pg-quizzes" class="page hide">
+  <div class="card"><h2>Your quizzes</h2><div id="list"></div></div></section>
+<section id="pg-treats" class="page hide">
+  <div class="card"><h2>🎁 Treat journal</h2><div id="tlog"></div><div class="row" style="margin-top:10px"><input id="tnew" placeholder="Add a treat to your menu" style="flex:1"><button id="tadd">Add</button></div><p class="mut" id="tmenu"></p></div>
+  </section>
+<section id="pg-garden" class="page hide">
+  <div class="card"><h2>🌻 Your garden</h2><p class="mut" style="margin-top:0">Every finished session plants one. Bloom big, or visit the withered ones.</p><div class="garden" id="garden"></div></div>
+</section>
+<section id="pg-create" class="page hide">
+  <div class="card">
+    <h2>Create a quiz</h2>
+    <input id="qname" placeholder="Quiz name (e.g. AP Bio – Cells)">
+    <div id="qs"></div>
+    <div class="row" style="margin-top:10px"><button id="addQ">+ Add question</button><button class="pri" id="save">Save quiz</button></div>
+    <p class="mut">Wrong options are optional. Leave them blank and you’ll type the answer from memory, which is even better for learning.</p>
+  </div>
+</section>
+
+<section id="pg-study" class="page hide">
+  <div class="card modes" id="modeCard">
+    <h2 id="studyTitle"></h2>
+    <div class="row" id="modes"></div>
+    <p class="mut" id="modeInfo"></p>
+    <button class="pri" id="go">Start</button> <button id="back1">Back</button>
+  </div>
+  <div id="play" class="hide">
+    <div class="card" id="plant"></div>
+    <div class="hud card"><span id="hearts"></span><span id="streak"></span><span id="prog" class="mut"></span></div>
+    <div class="card" id="qcard"></div>
+  </div>
+</section>
+
+<div id="treat" class="card hide" style="border-color:var(--acc)"><h2>🎉 You earned a treat!</h2><p class="mut" id="treatWhy"></p><div id="treatOpts"></div><button id="treatSkip">Not now</button></div>
+<div id="quest" class="card hide" style="border-color:var(--grn)">
+  <h2>🏃 Movement quest</h2>
+  <p id="questTxt"></p>
+  <div style="font-size:42px;font-weight:800" id="qt">30</div>
+  <button id="qskip">Skip (no bonus)</button>
+</div>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let S={quizzes:[{name:'Sample – Biology',qs:[
+ {q:'What organelle makes most of the cell’s ATP?',a:'Mitochondria',o:['Ribosome','Golgi body','Nucleus']},
+ {q:'What molecule carries genetic information?',a:'DNA',o:['ATP','Lipid','Glucose']},
+ {q:'Where does photosynthesis happen?',a:'Chloroplast',o:['Vacuole','Mitochondria','Lysosome']},
+ {q:'Which process splits one cell into two identical cells?',a:'Mitosis',o:['Meiosis','Osmosis','Diffusion']},
+ {q:'What is the powerhouse of the cell? (type it)',a:'Mitochondria',o:[]},
+ {q:'Name the sugar plants make during photosynthesis (type it)',a:'Glucose',o:[]}]}],xp:0};
+try{const r=localStorage.getItem('bloom1');if(r)S=JSON.parse(r)}catch(e){}
+S.treats=S.treats||[];S.menu=S.menu||['🍫 A snack','📺 One episode of a show','🎮 15 min of gaming','🚶 A walk outside','📞 Call a friend'];S.next=S.next||150;S.garden=S.garden||[];
+const save=()=>{try{localStorage.setItem('bloom1',JSON.stringify(S))}catch(e){}};
+const MODES={chill:{h:5,d:8,t:'Chill: 5 hearts, gentle wilting'},normal:{h:3,d:15,t:'Normal: 3 hearts, steady wilting'},hardcore:{h:2,d:28,t:'Hardcore: 2 hearts, your plant wilts fast'}};
+let draft=[],G=null,mode='normal',qi=-1,AC=null;
+
+/* sound */
+let MUTE=false;
+function tone(f1,f2,dur,type,vol){if(MUTE)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.setValueAtTime(f1,AC.currentTime);o.frequency.exponentialRampToValueAtTime(f2,AC.currentTime+dur);g.gain.setValueAtTime(vol,AC.currentTime);g.gain.exponentialRampToValueAtTime(.001,AC.currentTime+dur);o.connect(g).connect(AC.destination);o.start();o.stop(AC.currentTime+dur)}catch(e){}}
+const bonk=()=>{tone(180,40,.4,'sine',.35);setTimeout(()=>tone(520,140,.3,'sawtooth',.07),40);setTimeout(()=>tone(95,40,.25,'square',.1),110)};
+const witherSound=()=>tone(420,50,1,'sawtooth',.1);
+const bloomSound=()=>[523,659,784,1047,1319,1568].forEach((f,i)=>setTimeout(()=>tone(f,f,.35,'triangle',.12),i*100));
+const chime=()=>[523,659,784,1047].forEach((f,i)=>setTimeout(()=>tone(f,f,.2,'triangle',.14),i*80));
+
+/* plant */
+function plantSVG(p){
+  const hue=Math.round(20+p*1.0),leaf=`hsl(${hue},${p<8?15:55}%,${p<8?35:42}%)`;
+  const h=45+p*.95,droop=p<35?-(35-p)*1.6:0,top=200-h;
+  let f='';
+  if(p>=30&&p<55)f=`<ellipse cx="100" cy="${top-8}" rx="${9+(p-30)*.2}" ry="${14+(p-30)*.3}" fill="hsl(${330},60%,${55+(p-30)*.3}%)"/><path d="M92 ${top+2} q8 8 16 0" stroke="${leaf}" stroke-width="4" fill="none"/>`;
+  if(p>=55){const s=(p-55)/45,r=8+s*22;let pet='';for(let i=0;i<8;i++)pet+=`<ellipse cx="100" cy="${top-r*.9}" rx="${r*.55}" ry="${r}" fill="hsl(335,75%,${68-s*8}%)" transform="rotate(${i*45} 100 ${top})"/>`;f=pet+`<circle cx="100" cy="${top}" r="${6+s*6}" fill="#f4c542"/>`}
+  const leaves=p>=8?`<ellipse cx="78" cy="${200-h*.45}" rx="22" ry="9" fill="${leaf}" transform="rotate(${-25+(p<35?30:0)} 78 ${200-h*.45})"/><ellipse cx="122" cy="${200-h*.65}" rx="22" ry="9" fill="${leaf}" transform="rotate(${25-(p<35?30:0)} 122 ${200-h*.65})"/>`:'';
+  const face=`<circle cx="92" cy="222" r="2.5" fill="#3b2a22"/><circle cx="108" cy="222" r="2.5" fill="#3b2a22"/><path d="${p<35?'M94 230 q6 -5 12 0':'M94 227 q6 6 12 0'}" stroke="#3b2a22" stroke-width="2" fill="none"/>`;
+  return `<svg viewBox="0 0 200 250"><g transform="rotate(${droop} 100 200)"><path d="M100 200 L100 ${top}" stroke="${leaf}" stroke-width="7" stroke-linecap="round"/>${leaves}${f}</g><path d="M65 205 h70 l-8 40 h-54z" fill="#c9764a"/><rect x="60" y="198" width="80" height="12" rx="4" fill="#b8643a"/>${face}</svg>`;
+}
+function stageName(p){return p<=0?'Withered 💀':p<30?'Wilting':p<55?'Budding':p<85?'Unfurling':'Full bloom'}
+function drawPlant(cls){const el=$('plant');el.innerHTML=plantSVG(G.plant)+`<div class="mut">${stageName(G.plant)} · ${Math.round(G.plant)}%</div><div class="bar"><i style="width:${G.plant}%"></i></div>`;if(cls){const s=el.querySelector('svg');s.classList.add(cls);if(cls==='shake'){const b=document.createElement('div');b.className='bonk';b.textContent='BONK!';el.appendChild(b)}}}
+
+/* home */
+function renderHome(){
+  renderGarden();$('xpTop').textContent='⭐ '+S.xp+' XP';
+  $('list').innerHTML=S.quizzes.length?'':'<p class="mut">No quizzes yet.</p>';
+  S.quizzes.forEach((z,i)=>{const d=document.createElement('div');d.className='row sp qrow';d.innerHTML=`<span><b>${esc(z.name)}</b><br><span class="mut">${z.qs.length} questions</span></span><span class="row"><button class="pri" data-s="${i}">Study</button><button data-d="${i}">🗑</button></span>`;$('list').appendChild(d)});
+  $('list').querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>openStudy(+b.dataset.s));
+  $('list').querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{S.quizzes.splice(+b.dataset.d,1);save();renderHome()});
+}
+function renderDraft(){
+  $('qs').innerHTML='';
+  draft.forEach((d,i)=>{const w=document.createElement('div');w.className='qrow';w.innerHTML=`<input placeholder="Question ${i+1}" value="${esc(d.q)}" data-f="q"><input placeholder="Correct answer" value="${esc(d.a)}" data-f="a"><input placeholder="Wrong options, separated by commas (optional)" value="${esc(d.o)}" data-f="o">`;w.querySelectorAll('input').forEach(inp=>inp.oninput=()=>d[inp.dataset.f]=inp.value);$('qs').appendChild(w)});
+}
+$('addQ').onclick=()=>{draft.push({q:'',a:'',o:''});renderDraft()};
+$('save').onclick=()=>{
+  const qs=draft.filter(d=>d.q.trim()&&d.a.trim()).map(d=>({q:d.q.trim(),a:d.a.trim(),o:d.o.split(',').map(s=>s.trim()).filter(Boolean)}));
+  if(!$('qname').value.trim()||!qs.length){alert('Add a quiz name and at least one complete question.');return}
+  S.quizzes.push({name:$('qname').value.trim(),qs});save();$('qname').value='';draft=[{q:'',a:'',o:''}];renderDraft();renderHome();show('quizzes');
+};
+
+/* study */
+let cur=0;
+function openStudy(i){cur=i;S.last=i;save();show('study');$('modeCard').classList.remove('hide');$('play').classList.add('hide');$('studyTitle').textContent=S.quizzes[i].name;drawModes()}
+function drawModes(){$('modes').innerHTML='';Object.keys(MODES).forEach(k=>{const b=document.createElement('button');b.textContent=k[0].toUpperCase()+k.slice(1);if(k===mode)b.className='on';b.onclick=()=>{mode=k;drawModes()};$('modes').appendChild(b)});$('modeInfo').textContent=MODES[mode].t}
+$('back1').onclick=()=>{clearInterval(qtimer);$('quest').classList.add('hide');show('quizzes')};
+$('go').onclick=()=>{
+  const m=MODES[mode],qs=[...S.quizzes[cur].qs].sort(()=>Math.random()-.5);
+  G={queue:qs,revenge:[],hearts:m.h,max:m.h,d:m.d,plant:45,streak:0,answered:0,total:qs.length,right:0,xp:0,rev:null};
+  $('modeCard').classList.add('hide');$('play').classList.remove('hide');drawPlant();nextQ();
+};
+function hud(){$('hearts').textContent='❤️'.repeat(G.hearts)+'🖤'.repeat(G.max-G.hearts);$('streak').textContent='🔥 '+G.streak;$('prog').textContent=(G.revenge.length?G.revenge.length+' revenge · ':'')+G.queue.length+' left'}
+function nextQ(){
+  hud();
+  let q=null;G.rev=null;
+  const due=G.revenge.findIndex(r=>r.due<=G.answered);
+  if(due>=0){q=G.revenge.splice(due,1)[0].q;G.rev=true}
+  else if(G.queue.length)q=G.queue.shift();
+  else if(G.revenge.length){q=G.revenge.shift().q;G.rev=true}
+  if(!q)return finish();
+  G.q=q;hud();
+  const c=$('qcard');
+  c.innerHTML=(G.rev?'<span class="tag">⚔️ REVENGE ROUND</span> ':'')+`<h2 style="margin-top:8px">${esc(q.q)}</h2><div id="ans"></div>`;
+  if(q.o.length){[q.a,...q.o].sort(()=>Math.random()-.5).forEach(t=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>answer(t===q.a,b);$('ans').appendChild(b)})}
+  else{$('ans').innerHTML='<input id="typed" placeholder="Type your answer" autocomplete="off"><button class="pri" id="sub">Check</button>';const f=()=>answer($('typed').value.trim().toLowerCase()===q.a.toLowerCase());$('sub').onclick=f;$('typed').onkeydown=e=>{if(e.key==='Enter')f()};$('typed').focus()}
+}
+function answer(ok){
+  G.answered++;
+  const c=$('qcard');c.querySelectorAll('button,input').forEach(x=>x.disabled=true);
+  let msg;
+  if(ok){
+    chime();G.streak++;G.right++;G.plant=Math.min(100,G.plant+12);const gain=10+Math.min(G.streak,10)+(G.rev?15:0);G.xp+=gain;S.xp+=gain;
+    if(G.rev&&G.hearts<G.max){G.hearts++;msg=`⚔️ Revenge won! Heart restored. +${gain} XP`}else msg=`✅ Correct! +${gain} XP`;
+    drawPlant('happy');
+  }else{
+    bonk();G.hearts--;G.streak=0;G.plant=Math.max(0,G.plant-G.d);
+    if(!G.rev||true)G.revenge.push({q:G.q,due:G.answered+2});
+    msg=`❌ Not quite. Answer: <b>${esc(G.q.a)}</b>. It’ll come back as a revenge question soon.`;
+    drawPlant('shake');c.classList.add('shake');setTimeout(()=>c.classList.remove('shake'),500);
+  }
+  save();hud();checkTreat(ok);
+  const m=document.createElement('div');m.style.marginTop='10px';m.innerHTML=`<p class="${ok?'good':'bad'}">${msg}</p>`;
+  const n=document.createElement('button');n.className='pri';n.textContent='Next';m.appendChild(n);c.appendChild(m);
+  n.onclick=()=>{if(G.hearts<=0||G.plant<=0)return finish();if(G.answered%5===0)return quest();nextQ()};
+  n.focus();
+}
+function finish(){
+  const dead=G.plant<=0,out=G.hearts<=0;
+  $('qcard').innerHTML=`<h2>${dead?'Your plant withered 💀':out?'Out of hearts 💔':'Session complete 🌸'}</h2><p>${G.right}/${G.answered} correct · +${G.xp} XP · plant at ${Math.round(G.plant)}% (${stageName(G.plant)})</p><button class="pri" id="again">Study again</button> <button id="home2">Home</button>`;
+  $('again').onclick=()=>{$('go').onclick()};$('home2').onclick=$('back1').onclick;
+  if(dead)witherSound();else if(G.plant>=85)bloomSound();else if(!out)chime();
+  recordGarden();
+  if(!out&&!dead&&G.plant>=85)offerTreat('Your plant finished in full bloom');
+}
+
+/* movement quest */
+const QUESTS=['Do 20 jumping jacks','Take a short walk or grab some water','Stand up and stretch your arms overhead','Do 10 slow deep breaths'];
+let qtimer;
+function quest(){
+  $('quest').classList.remove('hide');$('questTxt').textContent=QUESTS[Math.floor(Math.random()*QUESTS.length)]+' – complete the timer for bonus XP and a plant boost.';
+  let t=30;$('qt').textContent=t;clearInterval(qtimer);
+  qtimer=setInterval(()=>{t--;$('qt').textContent=t;if(t<=0){clearInterval(qtimer);G.xp+=25;S.xp+=25;G.plant=Math.min(100,G.plant+10);save();chime();$('quest').classList.add('hide');drawPlant('happy');nextQ()}},1000);
+}
+$('qskip').onclick=()=>{clearInterval(qtimer);$('quest').classList.add('hide');nextQ()};
+
+/* treats */
+function checkTreat(ok){
+  if(S.xp>=S.next){while(S.next<=S.xp)S.next+=150;save();return offerTreat('You hit an XP milestone ('+S.xp+' XP)')}
+  if(ok&&G.rev&&!G.revenge.length&&!G.queue.length)offerTreat('You cleared every revenge question');
+}
+function offerTreat(why){
+  if(!S.menu.length)return;
+  $('treatWhy').textContent=why+'. Pick a treat, then log it.';$('treatOpts').innerHTML='';
+  S.menu.forEach(m=>{const b=document.createElement('button');b.className='opt';b.textContent=m;b.onclick=()=>{S.treats.push({t:m,r:why,d:new Date().toLocaleDateString()});save();$('treat').classList.add('hide');renderTreats()};$('treatOpts').appendChild(b)});
+  $('treat').classList.remove('hide');$('treat').scrollIntoView({behavior:'smooth'});
+}
+$('treatSkip').onclick=()=>$('treat').classList.add('hide');
+function renderTreats(){
+  $('tlog').innerHTML=S.treats.length?S.treats.slice().reverse().map(t=>`<div class="qrow"><b>${esc(t.t)}</b> <span class="mut">${esc(t.d)}</span><br><span class="mut">Earned: ${esc(t.r)}</span></div>`).join(''):'<p class="mut">No treats yet. Earn some XP to unlock your first.</p>';
+  $('tmenu').innerHTML='Your menu: '+S.menu.map((m,i)=>`${esc(m)} <span data-x="${i}" style="cursor:pointer">✕</span>`).join(' · ');
+  $('tmenu').querySelectorAll('[data-x]').forEach(x=>x.onclick=()=>{S.menu.splice(+x.dataset.x,1);save();renderTreats()});
+}
+$('tadd').onclick=()=>{const v=$('tnew').value.trim();if(v){S.menu.push(v);$('tnew').value='';save();renderTreats()}};
+
+/* focus audio */
+let AN=[],AG=null;
+function setAud(k){
+  AN.forEach(n=>{try{n.stop()}catch(e){}});AN=[];if(k==='off')return;
+  try{
+    AC=AC||new (window.AudioContext||window.webkitAudioContext)();AC.resume();
+    AG=AC.createGain();AG.gain.value=$('vol').value/100*.5;AG.connect(AC.destination);
+    if(k==='bin'){[[200,-1],[210,1]].forEach(([f,p])=>{const o=AC.createOscillator(),pn=AC.createStereoPanner();o.frequency.value=f;pn.pan.value=p;o.connect(pn).connect(AG);o.start();AN.push(o)})}
+    else{const b=AC.createBuffer(1,AC.sampleRate*4,AC.sampleRate),d=b.getChannelData(0);let l=0;for(let i=0;i<d.length;i++){const w=Math.random()*2-1;if(k==='white')d[i]=w*.5;else{l=(l+.02*w)/1.02;d[i]=l*3.5}}const s=AC.createBufferSource();s.buffer=b;s.loop=true;s.connect(AG);s.start();AN.push(s)}
+  }catch(e){}
+}
+$('aud').onchange=()=>setAud($('aud').value);
+$('vol').oninput=()=>{if(AG)AG.gain.value=$('vol').value/100*.5};
+
+/* garden */
+function recordGarden(){if(G.done||!G.answered)return;G.done=1;S.garden.push({p:Math.round(G.plant),d:new Date().toLocaleDateString()});S.garden=S.garden.slice(-24);save();renderGarden()}
+function renderGarden(){$('garden').innerHTML=S.garden.length?S.garden.slice().reverse().map(g=>`<div class="mini">${plantSVG(g.p)}${g.p}%<br>${esc(g.d)}</div>`).join(''):'<p class="mut">Finish a session and your first plant will grow here.</p>'}
+
+/* mute */
+$('mute').onclick=()=>{MUTE=!MUTE;$('mute').textContent=MUTE?'🔇':'🔊'};
+
+/* pages */
+const PAGES=[['home','🏡','Home'],['quizzes','📚','Quizzes'],['create','✏️','Create'],['garden','🌻','Garden'],['treats','🎁','Treats'],['focus','🎧','Focus']];
+function show(p){
+  document.querySelectorAll('.page').forEach(x=>x.classList.toggle('hide',x.id!=='pg-'+p));
+  document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.p===p));
+  $('nav').classList.toggle('hide',p==='study');
+  if(p==='quizzes')renderHome();if(p==='home')renderDash();window.scrollTo(0,0);
+}
+PAGES.forEach(([k,e,n])=>{const b=document.createElement('button');b.dataset.p=k;b.textContent=e+' '+n;b.onclick=()=>show(k);$('nav').appendChild(b)});
+
+/* themes + dashboard */
+const THEMES=[['light','☁️','Sky'],['bubblegum','🍭','Cotton candy'],['matcha','🫧','Mint lagoon'],['dusk','🔮','Twilight'],['dark','🌙','Moonlit pond']];
+function setTheme(t){document.documentElement.dataset.theme=t;try{localStorage.setItem('bloomTheme',t)}catch(e){}document.querySelectorAll('#themes button').forEach(b=>b.classList.toggle('on',b.dataset.t===t))}
+function initTheme(){let t=null;try{t=localStorage.getItem('bloomTheme')}catch(e){}if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';THEMES.forEach(([k,e,n])=>{const b=document.createElement('button');b.dataset.t=k;b.textContent=e+' '+n;b.onclick=()=>setTheme(k);$('themes').appendChild(b)});setTheme(t)}
+function armReset(id,label,fn){const b=$(id);let t=null;b.onclick=()=>{if(t){clearTimeout(t);t=null;b.textContent=label;fn();return}b.textContent='Tap again to confirm';t=setTimeout(()=>{t=null;b.textContent=label},4000)}}
+function wipe(all){S.xp=0;S.garden=[];S.treats=[];S.next=150;S.last=undefined;if(all)S.quizzes=[];save();renderHome();renderTreats();renderGarden();renderDash()}
+armReset('rprog','Reset progress',()=>wipe(false));
+armReset('rall','Erase everything',()=>wipe(true));
+function renderDash(){
+  const g=S.garden[S.garden.length-1],p=g?g.p:45,h=new Date().getHours(),hi=h<12?'Good morning':h<18?'Good afternoon':'Good evening';
+  const zi=S.quizzes[S.last]?S.last:0,z=S.quizzes[zi],left=Math.max(0,S.next-S.xp),pct=Math.min(100,Math.round(100-left/150*100));
+  $('dash').innerHTML=`<div class="card" style="text-align:center"><div style="width:150px;margin:auto">${plantSVG(p)}</div><h2>${hi}! 🌤️</h2><p class="mut">${g?'Your last plant ended at '+g.p+'%. Ready to grow a new one?':'Your garden is empty. Let’s plant something!'}</p><button class="pri" id="dgo">${z?'Study '+esc(z.name):'Create your first quiz'}</button></div><div class="stats"><div class="stat"><b>⭐ ${S.xp}</b>XP</div><div class="stat"><b>🌻 ${S.garden.length}</b>plants grown</div><div class="stat"><b>📚 ${S.quizzes.length}</b>quizzes</div><div class="stat"><b>🎁 ${S.treats.length}</b>treats earned</div></div><div class="card"><div class="row sp"><b>Next treat</b><span class="mut">${left} XP to go</span></div><div class="bar"><i style="width:${pct}%"></i></div></div>`;
+  $('dgo').onclick=()=>z?openStudy(zi):show('create');
+}
+
+draft=[{q:'',a:'',o:''}];renderDraft();renderHome();renderTreats();renderGarden();initTheme();show('home');
+</script></body></html>
