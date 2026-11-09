@@ -131,8 +131,8 @@ let S={quizzes:[{name:'Sample – Biology',qs:[
  {q:'What molecule carries genetic information?',a:'DNA',o:['ATP','Lipid','Glucose']},
  {q:'Where does photosynthesis happen?',a:'Chloroplast',o:['Vacuole','Mitochondria','Lysosome']},
  {q:'Which process splits one cell into two identical cells?',a:'Mitosis',o:['Meiosis','Osmosis','Diffusion']},
- {q:'What is the powerhouse of the cell? (type it)',a:'Mitochondria',o:[]},
- {q:'Name the sugar plants make during photosynthesis (type it)',a:'Glucose',o:[]}]}],xp:0};
+ {q:'What is the powerhouse of the cell? (type it, capitalize the first letter)',a:'Mitochondria',o:[]},
+ {q:'Name the sugar plants make during photosynthesis (type it, capitalize the first letter)',a:'Glucose',o:[]}]}],xp:0};
 try{const r=localStorage.getItem('bloom1');if(r)S=JSON.parse(r)}catch(e){}
 S.treats=S.treats||[];S.menu=S.menu||['🍫 A snack','📺 One episode of a show','🎮 15 min of gaming','🚶 A walk outside','📞 Call a friend'];S.next=S.next||150;S.garden=S.garden||[];
 const save=()=>{try{localStorage.setItem('bloom1',JSON.stringify(S))}catch(e){}};
